@@ -37,6 +37,9 @@ jobs:
         run: |
           mkdir -p packages
           for proj in $(find . -name "*.csproj"); do
+              echo "Building $proj"
+              dotnet build "$proj" --configuration Release
+
               echo "Packing $proj"
               dotnet pack "$proj" --configuration Release \
                 -p:PackageVersion=${{ needs.generate-version.outputs.new_version }} \
