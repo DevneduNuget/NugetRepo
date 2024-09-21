@@ -29,12 +29,16 @@ jobs:
       env:
         NUGET_AUTH_TOKEN: ${{ secrets.NUGET_API_KEY }}
     - name: Pack      
-      run: |
-        for proj in $(find . -name "*.csproj"); do
-          echo "Packing and publishing $proj"
-          dotnet pack $proj --configuration Release --no-build \          
-           -p:PackageVersion=${{ needs.generate-version.outputs.new_version }} \
-           -p:RepositoryUrl=https://github.com/${{github.repository_owner}}/$proj \
-           -o packages
-          dotnet nuget push packages/*.nupkg --skip-duplicate
+      run: |       
+
+        mkdir -p packages  
+        for proj in $(find . -name "*.csproj"); do      
+            dotnet pack "$proj" --configuration Release --no-build \
+            -p:PackageVersion=${{ needs.generate-version.outputs.new_version }} \
+            -p:RepositoryUrl=https://github.com/${{ github.repository_owner }}/$(basename "$proj" .csproj) \
+            -o packages
+      
+        for nupkg in packages/*.nupkg; do
+        dotnet nuget push "$nupkg" --api-key ${{ secrets.NUGET_API_KEY }} --skip-duplicate
         done
+       
