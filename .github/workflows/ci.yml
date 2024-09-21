@@ -32,9 +32,9 @@ jobs:
       run: |
         for proj in $(find . -name "*.csproj"); do
           echo "Packing and publishing $proj"
-          dotnet pack $proj --configuration Release \
+          dotnet pack $proj --configuration Release --no-build \          
            -p:PackageVersion=${{ needs.generate-version.outputs.new_version }} \
            -p:RepositoryUrl=https://github.com/${{github.repository_owner}}/$proj \
            -o packages
-          dotnet nuget push packages/*.nupkg
+          dotnet nuget push packages/*.nupkg --skip-duplicate
         done
