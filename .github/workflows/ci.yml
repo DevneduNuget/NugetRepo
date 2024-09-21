@@ -11,7 +11,7 @@ jobs:
       id: tab_bump
       uses: anothrNick/github-tag-action@1.36.0
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.NUGET_API_KEY }}
         INITIAL_VERSION: 1.0.0
         DEFAULT_BUMP: patch
     outputs:
@@ -27,7 +27,7 @@ jobs:
         dotnet-version: 8.0.x
         source-url: https://nuget.pkg.github.com/${{github.repository_owner}}/index.json
       env:
-        NUGET_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        NUGET_AUTH_TOKEN: ${{ secrets.NUGET_API_KEY }}
     - name: Pack      
       run: |
         for proj in $(find . -name "*.csproj"); do
