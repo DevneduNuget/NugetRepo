@@ -35,29 +35,23 @@ jobs:
 
       - name: Pack and Publish
         run: |
-            mkdir -p packages
-            for proj in $(find . -name "*.csproj"); do
-                echo "Building $proj"
-                dotnet build "$proj" --configuration Release
+          mkdir -p packages
+          for proj in $(find . -name "*.csproj"); do
+              echo "Building $proj"
+              dotnet build "$proj" --configuration Release
 
-                project_name=$(basename "$proj" .csproj)
-                package_version=${{ needs.generate-version.outputs.new_version }}
-                package_id="${project_name} v${package_version}"
+              echo "Packing $proj"
+              dotnet pack "$proj" --configuration Release \
+                -p:PackageVersion=${{ needs.generate-version.outputs.new_version }} \
+                -p:RepositoryUrl=https://github.com/${{ github.repository_owner }}/$(basename "$proj" .csproj) \
+                -o packages
 
-                echo "Packing $proj with PackageId: $package_id"
-                dotnet pack "$proj" --configuration Release \
-                  -p:PackageVersion=${package_version} \
-                  -p:PackageId="${package_id}" \
-                  -p:RepositoryUrl=https://github.com/${{ github.repository_owner }}/${project_name} \
-                  -o packages
-
-                for nupkg in packages/*.nupkg; do
-                    if [ -f "$nupkg" ]; then
-                        echo "Publishing $nupkg"
-                        dotnet nuget push "$nupkg" --api-key ${{ secrets.NUGET_API_KEY }} --skip-duplicate --source https://api.nuget.org/v3/index.json
-                    else
-                        echo "No .nupkg file found for $proj"
-                    fi
-                done
-            done
-
+              for nupkg in packages/*.nupkg; do
+                  if [ -f "$nupkg" ]; then
+                      echo "Publishing $nupkg"
+                      dotnet nuget push "$nupkg" --api-key ${{ secrets.NUGET_API_KEY }} --skip-duplicate --source https://nuget.pkg.github.com/DevneduNuget/index.json
+                  else
+                      echo "No .nupkg file found for $proj"
+                  fi
+              done
+          done
