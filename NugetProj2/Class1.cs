@@ -4,7 +4,7 @@
     {
         public void Main()
         {
-            Console.WriteLine("Test");
+            Console.WriteLine("Test123");
         }
     }
 }
