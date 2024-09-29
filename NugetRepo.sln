@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.11.35303.130
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NugetProj1", "NugetProj1\NugetProj1.csproj", "{2E475C96-A545-4321-8F4C-56227CF2CCBE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NugetProj1", "NugetProj1\NugetProj1.csproj", "{2E475C96-A545-4321-8F4C-56227CF2CCBE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NugetProj2", "NugetProj2\NugetProj2.csproj", "{B5A88273-CF10-4F0E-88D9-6D6A3BE3E5A2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NugetProj2", "NugetProj2\NugetProj2.csproj", "{B5A88273-CF10-4F0E-88D9-6D6A3BE3E5A2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp.DonotPublish", "ConsoleApp.DonotPublish\ConsoleApp.DonotPublish.csproj", "{595373DD-EC8C-40EA-90DF-5EE6BA6B665E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{B5A88273-CF10-4F0E-88D9-6D6A3BE3E5A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B5A88273-CF10-4F0E-88D9-6D6A3BE3E5A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B5A88273-CF10-4F0E-88D9-6D6A3BE3E5A2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{595373DD-EC8C-40EA-90DF-5EE6BA6B665E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{595373DD-EC8C-40EA-90DF-5EE6BA6B665E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{595373DD-EC8C-40EA-90DF-5EE6BA6B665E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{595373DD-EC8C-40EA-90DF-5EE6BA6B665E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
